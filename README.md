@@ -1,51 +1,27 @@
 ## Fast Style Transfer in [TensorFlow](https://github.com/tensorflow/tensorflow)
 
-Add styles from famous paintings to any photo in a fraction of a second! [You can even style videos!](#video-stylization)
-
-<p align = 'center'>
-<img src = 'examples/style/udnie.jpg' height = '246px'>
-<img src = 'examples/content/stata.jpg' height = '246px'>
-<a href = 'examples/results/stata_udnie.jpg'><img src = 'examples/results/stata_udnie_header.jpg' width = '627px'></a>
-</p>
-<p align = 'center'>
-It takes 100ms on a 2015 Titan X to style the MIT Stata Center (1024×680) like Udnie, by Francis Picabia.
-</p>
-
-Our implementation is based off of a combination of Gatys' [A Neural Algorithm of Artistic Style](https://arxiv.org/abs/1508.06576), Johnson's [Perceptual Losses for Real-Time Style Transfer and Super-Resolution](http://cs.stanford.edu/people/jcjohns/eccv16/), and Ulyanov's [Instance Normalization](https://arxiv.org/abs/1607.08022). 
-
-## Video Stylization 
-Here we transformed every frame in a video, then combined the results. [Click to go to the full demo on YouTube!](https://www.youtube.com/watch?v=xVJwwWQlQ1o) The style here is Udnie, as above.
-<div align = 'center'>
-     <a href = 'https://www.youtube.com/watch?v=xVJwwWQlQ1o'>
-        <img src = 'examples/results/fox_udnie.gif' alt = 'Stylized fox video. Click to go to YouTube!' width = '800px' height = '400px'>
-     </a>
-</div>
-
-See how to generate these videos [here](#stylizing-video)!
+This is us trying to perform style transfer on our choice of paintings based on the implementation by [Engstrom](https://github.com/lengstrom/fast-style-transfer). 
 
 ## Image Stylization
-We added styles from various paintings to a photo of Chicago. Click on thumbnails to see full applied style images.
-<div align='center'>
-<img src = 'examples/content/chicago.jpg' height="200px">
-</div>
-     
-<div align = 'center'>
-<a href = 'examples/style/wave.jpg'><img src = 'examples/thumbs/wave.jpg' height = '200px'></a>
-<img src = 'examples/results/chicago_wave.jpg' height = '200px'>
-<img src = 'examples/results/chicago_udnie.jpg' height = '200px'>
-<a href = 'examples/style/udnie.jpg'><img src = 'examples/thumbs/udnie.jpg' height = '200px'></a>
-<br>
-<a href = 'examples/style/rain_princess.jpg'><img src = 'examples/thumbs/rain_princess.jpg' height = '200px'></a>
-<img src = 'examples/results/chicago_rain_princess.jpg' height = '200px'>
-<img src = 'examples/results/chicago_la_muse.jpg' height = '200px'>
-<a href = 'examples/style/la_muse.jpg'><img src = 'examples/thumbs/la_muse.jpg' height = '200px'></a>
 
-<br>
-<a href = 'examples/style/the_shipwreck_of_the_minotaur.jpg'><img src = 'examples/thumbs/the_shipwreck_of_the_minotaur.jpg' height = '200px'></a>
-<img src = 'examples/results/chicago_wreck.jpg' height = '200px'>
-<img src = 'examples/results/chicago_the_scream.jpg' height = '200px'>
-<a href = 'examples/style/the_scream.jpg'><img src = 'examples/thumbs/the_scream.jpg' height = '200px'></a>
-</div>
+We added two style of paintings: A chinese painting and Picasso's Weeping woman painting. 
+
+After training the models, we stylized a photo of Taj Mahal using Picasso's painting. 
+
+<p align = 'center'>
+<img src = 'examples/style/pablo-picasso.jpg' height = '246px'>
+<img src = 'examples/content/taj-mahal.jpeg' height = '246px'>
+<a href = 'output_files/picasso/1_8278.png'><img src = 'output_files/picasso/1_8278.png' width = '627px'></a>
+</p>
+
+We also stylized a photo of of Cave2 using a Chinese painting. 
+
+<p align = 'center'>
+<img src = 'examples/style/chinese.jpg' height = '246px'>
+<img src = 'examples/content/cave2.jpg' height = '246px'>
+<a href = 'output_files/chinese/0_5000.png'><img src = 'output_files/chinese/0_5000.png' width = '627px'></a>
+</p>
+
 
 ## Implementation Details
 Our implementation uses TensorFlow to train a fast style transfer network. We use roughly the same transformation network as described in Johnson, except that batch normalization is replaced with Ulyanov's instance normalization, and the scaling/offset of the output `tanh` layer is slightly different. We use a loss function close to the one described in Gatys, using VGG19 instead of VGG16 and typically using "shallower" layers than in Johnson's implementation (e.g. we use `relu1_1` rather than `relu1_2`). Empirically, this results in larger scale style features in transformations.
@@ -69,14 +45,6 @@ Use `evaluate.py` to evaluate a style transfer network. Run `python evaluate.py`
       --in-path dir/of/test/imgs/ \
       --out-path dir/for/results/
 
-### Stylizing Video
-Use `transform_video.py` to transfer style into a video. Run `python transform_video.py` to view all the possible parameters. Requires `ffmpeg`. [More detailed documentation here](docs.md#video). Example usage:
-
-    python transform_video.py --in-path path/to/input/vid.mp4 \
-      --checkpoint path/to/style/model.ckpt \
-      --out-path out/video.mp4 \
-      --device /gpu:0 \
-      --batch-size 4
 
 ### Requirements
 You will need the following to run the above:
@@ -86,6 +54,12 @@ You will need the following to run the above:
   - A decent GPU
   - All the required NVIDIA software to run TF on a GPU (cuda, etc)
 - ffmpeg 3.1.3 if you want to stylize video
+
+### References
+
+Gatys' [A Neural Algorithm of Artistic Style](https://arxiv.org/abs/1508.06576), 
+Johnson's [Perceptual Losses for Real-Time Style Transfer and Super-Resolution](http://cs.stanford.edu/people/jcjohns/eccv16/), 
+Ulyanov's [Instance Normalization](https://arxiv.org/abs/1607.08022). 
 
 ### Citation
 ```
