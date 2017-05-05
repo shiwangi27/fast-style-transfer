@@ -4,14 +4,14 @@ This is us trying to perform style transfer on our choice of paintings based on 
 
 ## Image Stylization
 
-We added two style of paintings: A chinese painting and Picasso's Weeping woman painting. 
+We added two styles of paintings: A chinese painting and Picasso's Weeping woman painting. 
 
 After training the models, we stylized a photo of Taj Mahal using Picasso's painting. 
 
 <p align = 'center'>
 <img src = 'examples/style/pablo-picasso.jpg' height = '246px'>
 <img src = 'examples/content/taj-mahal.jpeg' height = '246px'>
-<a href = 'output_files/picasso/1_8278.png'><img src = 'output_files/picasso/1_8278.png' width = '627px'></a>
+<a href = 'output_files/picasso/1_8278.png'><img src = 'output_files/picasso/1_8278.png' width = '575px'></a>
 </p>
 
 We also stylized a photo of of Cave2 using a Chinese painting. 
@@ -19,7 +19,7 @@ We also stylized a photo of of Cave2 using a Chinese painting.
 <p align = 'center'>
 <img src = 'examples/style/chinese.jpg' height = '246px'>
 <img src = 'examples/content/cave2.jpg' height = '246px'>
-<a href = 'output_files/chinese/0_5000.png'><img src = 'output_files/chinese/0_5000.png' width = '627px'></a>
+<a href = 'output_files/chinese/0_5000.png'><img src = 'output_files/chinese/0_5000.png' width = '575px'></a>
 </p>
 
 
